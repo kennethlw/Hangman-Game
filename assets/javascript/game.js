@@ -1,4 +1,6 @@
-
+ var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+        't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 //here is the array of possible answers
 var answers = ["rooster", "monkey", "sheep", 
@@ -36,11 +38,11 @@ function reset() {
 document.onkeyup = function keepGoing(event) {
   
 
-
 //select a random word for hangman from the array
 word = answers[Math.floor(Math.random() * answers.length)];
 secretWord.push(word);
 guesses.push(word);
+
 
 
 //replace the entirety of the word with blanks 
@@ -48,7 +50,7 @@ for (var i = 0; i < word.length; i++) {
 	guesses[i] = "_ ";
 }
 
-// prints the blanks in the html 
+// replaces the blanks in the html 
 function printWord() {
 	for (var i = 0; i < word.length; i++) {
 	var game = document.getElementById("game");
@@ -57,24 +59,32 @@ function printWord() {
 	}
 }
 
-
-//var game = document.getElementById("game");
-//game.innerHTML = "";
-
 //print out the blank spaces in the game
 printWord();
 
 //what happens after the user releases a key is contained in this function
-document.onkeyup = function(event) {	
+document.onkeyup = function guess (event) {	
 
 	//assigns whatever key the user presses into this var
 	var userGuess = event.key;
 
-	
+	if (userGuess === 'a' || userGuess === 'b' || userGuess === 'c' ||
+		userGuess === 'd' || userGuess === 'e' || userGuess === 'f' ||
+		userGuess === 'g' || userGuess === 'h' || userGuess === 'i' ||
+		userGuess === 'j' || userGuess === 'k' || userGuess === 'l' ||
+		userGuess === 'm' || userGuess === 'n' || userGuess === 'o' ||
+		userGuess === 'p' || userGuess === 'q' || userGuess === 'r' ||
+		userGuess === 's' || userGuess === 't' || userGuess === 'u' ||
+		userGuess === 'v' || userGuess === 'w' || userGuess === 'x' ||
+		userGuess === 'y' || userGuess === 'z'  ){
+		letters.push(userGuess);
+	}
+	else {	
+		alert("Please enter a correct key from the alphabet.");
+	}
 
 	//search the entire keyword to see if it contains the user input key
 	//if it does, display that key 
-
 	for (var j = 0; j < word.length; j++)
 	{
 	
@@ -106,9 +116,6 @@ document.onkeyup = function(event) {
 	}
 
 	//add the user guesses into the array to print to screen
-	letters.push(userGuess);
-
-	
 	document.getElementById("letters").innerHTML = letters.toString();
 
 	//function to determine if game is over by searching for blank spaces
@@ -118,7 +125,6 @@ document.onkeyup = function(event) {
 	}
 
 	gameOver();
-
 	//if there are no blank spaces, user wins, change win # and choose new word, and restart
 	if( m < 0 ) {
 		alert("Congratulations: you live for another day!");
@@ -127,10 +133,8 @@ document.onkeyup = function(event) {
 		reset();
 		keepGoing();
 	}
-	
 
-	game.innerHTML=""; 
-	printWord();
+	
 
 
 	//if user runs out of lives before solving, its game over!
@@ -139,8 +143,11 @@ document.onkeyup = function(event) {
 		reset();
 		keepGoing();
 	}
-}
 
+	game.innerHTML="";
+	printWord();
+}
+	
 
 
 }
