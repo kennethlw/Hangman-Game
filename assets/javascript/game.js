@@ -1,8 +1,11 @@
-var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-        't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-var answers = ["rooster", "monkey", "sheep", "horse", "giraffe", "shark", "iguana", "turtle", "raccoon", "cheetah"];
+
+//here is the array of possible answers
+var answers = ["rooster", "monkey", "sheep", 
+				"horse", "giraffe", "shark", 
+				"iguana", "turtle", "raccoon", 
+				"cheetah"];
+
 
 var word;
 var userGuess;
@@ -11,8 +14,28 @@ var secretWord = [];
 var letters = [];
 var lives = 6;
 var correctGuess = 0;
+var numWins = 0;
 
-alert("Press any key to start playing.");
+
+alert("Press any key to start after clicking OK.");
+
+
+//set everything back to default which will be used when game is over
+//or when game is won
+function reset() {
+	secretWord = [];
+	letters = [];
+	guesses = [];
+	lives = 6;
+	correctGuess = 0;
+	document.getElementById("score").innerHTML = lives;
+	document.getElementById("letters").innerHTML = letters;
+}
+
+//keep looping the game until user quits
+document.onkeyup = function keepGoing(event) {
+  
+
 
 //select a random word for hangman from the array
 word = answers[Math.floor(Math.random() * answers.length)];
@@ -26,7 +49,7 @@ for (var i = 0; i < word.length; i++) {
 }
 
 // prints the blanks in the html 
-function printWord(){
+function printWord() {
 	for (var i = 0; i < word.length; i++) {
 	var game = document.getElementById("game");
 	var create = document.createTextNode(guesses[i]);
@@ -35,18 +58,19 @@ function printWord(){
 }
 
 
-var game = document.getElementById("game");
-		game.innerHTML = "";
-		printWord();
+//var game = document.getElementById("game");
+//game.innerHTML = "";
 
+//print out the blank spaces in the game
+printWord();
 
+//what happens after the user releases a key is contained in this function
 document.onkeyup = function(event) {	
 
 	//assigns whatever key the user presses into this var
 	var userGuess = event.key;
 
-	//save the guesses in an array
-	//guesses.push(userGuess);
+	
 
 	//search the entire keyword to see if it contains the user input key
 	//if it does, display that key 
@@ -62,34 +86,63 @@ document.onkeyup = function(event) {
 
 	}
 
+	//searches the word for the user's guess and if it isnt contained this 
+	//will return -1
+	function myLives() {
+		str = word;
+		n = str.search(userGuess);
+		
+	}
+
+	myLives();
+
+	//if the myLives function returns a -1 then subtract a guess
+	if (n < 0) {
+		lives--;
+		document.getElementById("score").innerHTML = lives;
+	}
+	else {
+		document.getElementById("score").innerHTML = lives;
+	}
+
+	//add the user guesses into the array to print to screen
 	letters.push(userGuess);
 
 	
-	document.getElementById("letters").innerHTML = "<h2><p>Letters Guessed: </p></h2>" + letters.toString();
+	document.getElementById("letters").innerHTML = letters.toString();
 
+	//function to determine if game is over by searching for blank spaces
+	function gameOver() {
+		str = guesses.toString();
+		m = str.search("_ ");
+	}
 
-	console.log("correct guess is" + correctGuess);
+	gameOver();
 
-	if(correctGuess == word.length)
-	{
+	//if there are no blank spaces, user wins, change win # and choose new word, and restart
+	if( m < 0 ) {
 		alert("Congratulations: you live for another day!");
-		location.reload();
+		numWins++;
+		document.getElementById("wins").innerHTML = numWins;
+		reset();
+		keepGoing();
 	}
+	
 
-	if(correctGuess < 1 ) {
-		lives --;
-		document.getElementById("score").innerHTML = "<h2><p>Remaining lives: </p></h2>" + lives;
-	}
-
-
-	var ratefeld = document.getElementById("game");
 	game.innerHTML=""; 
 	printWord();
 
+
+	//if user runs out of lives before solving, its game over!
 	if (lives == 0) {
 		alert("Game Over: Hangman!");
-		location.reload();	
+		reset();
+		keepGoing();
 	}
 }
-	
+
+
+
+}
+
 	

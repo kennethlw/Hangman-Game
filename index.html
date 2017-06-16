@@ -2,25 +2,84 @@
 <html lang="en-us">
 <head>
 <meta charset="UTF-8">
+	<title>Hangman Game - Animal Style rated G</title>
 
-	
-
-	<title>My Animal Hangman Game</title>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
 
-	<div id="game">
-		<h1>Hangman Game</h1>
-	</div>
+	<div class="jumbotron">
+    <h1 class="text-center">Hangman</h1>
+    <h2 class="text-center">Save the Animals - Don't let them hang!</h2>
+  	</div>
 
-	<div id="score">
-	   <h2>Lives Remaining: 6 </h2>
-	</div>
-	<div id="letters">
-	   <h2>Letters Guessed:  </h2>
-	</div>
 
+	<div class="container">
+
+	 <div class="row">
+
+	 	<div class="panel panel-default">
+	 		<div class="panel-heading">
+	 			<h3 class="panel-title text text-center">Word</h3>
+			</div>
+			<div class="panel-body text-center">
+			<h1 id="game"></h1>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+	 		<div class="panel-heading">
+	 			<h3 class="panel-title text-center">Letters Guessed</h3>
+			</div>
+			<div class="panel-body text-center">
+			<h1 id="letters"></h1>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+	 		<div class="panel-heading">
+	 			<h3 class="panel-title text-center">Guesses Remaining</h3>
+			</div>
+			<div class="panel-body text-center">
+			<h1 id="score"></h1>
+			</div>
+		</div>
 	
+		
+		<div class="panel panel-default">
+	 		<div class="panel-heading">
+	 			<h3 class="panel-title text-center">Wins</h3>
+			</div>
+			<div class="panel-body text-center">
+			<h1 id="wins"></h1>
+			</div>
+		</div>
+
+		
+
+		<div class="panel panel-default">
+	 		<div class="panel-heading">
+	 			<h3 class="panel-title text-center">Music</h3>
+			</div>
+			<div class="panel-body text-center">
+			<h1 id="music">
+				<audio autoplay loop controls>
+  				<source src="assets/sounds/circle.mp3" type="audio/mp3">
+  				</audio>
+			</h1>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+	<footer id="footer" class="site-footer">
+      <div class="container-fluid">
+        <p class="footer-block">© Copyright 2017 Kenneth Wong</p>
+      </div>
+    </footer>
+
 	<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 </html>
